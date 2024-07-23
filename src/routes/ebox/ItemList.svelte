@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Item } from '../../types';
 	export let items: Item[] = [];
-
 	export let onEdit: (item: Item) => void;
 	export let onDelete: (serial_number: string) => void;
 </script>

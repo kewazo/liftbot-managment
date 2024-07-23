@@ -45,7 +45,7 @@
 </script>
 
 <main>
-	<h1>Svelte CRUD Example</h1>
+	<h1>E-Box Managment</h1>
 
 	{#if currentItem}
 		<ItemForm item={currentItem} onSubmit={handleUpdate} />

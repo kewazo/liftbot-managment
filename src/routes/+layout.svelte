@@ -22,6 +22,12 @@
 			<img src={data.auth.user.picture} width={36} referrerpolicy="no-referrer" alt="profile" />
 		</p>
 		<p>
+			<a href="/ebox">/ebox</a>
+		</p>
+		<p>
+			<a href="/">/dashboard</a>
+		</p>
+		<p>
 			<button on:click={() => signOut()}>Sign out</button>
 		</p>
 	{:else}
