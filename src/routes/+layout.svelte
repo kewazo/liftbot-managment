@@ -1,16 +1,21 @@
 <script lang="ts">
 	import '../app.css';
+	import '../styles.scss';
+
 	import { invalidateAll } from '$app/navigation';
 	import { signIn, signOut, initialize } from '$lib/client.js';
 	import type { PageData } from './$types.js';
 
 	export let data: PageData;
 	initialize(data, invalidateAll);
-
-	console.log('data', data);
 </script>
 
 <header>
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+	/>
+
 	{#if data.auth.user}
 		<p>
 			Signed in as {data.auth.user.name} ({data.auth.user.email})
