@@ -6,16 +6,37 @@
 	export let onDelete: (serial_number: string) => void;
 </script>
 
-{#each items as item}
-	<div>
-		<p>Serial Number: {item.serial_number}</p>
-		<p>Password: {item.password}</p>
-		<p>Date: {item.config.date}</p>
-		<p>Safety: {item.config.safety}</p>
-		<p>Battery: {item.config.battery}</p>
-		<p>Remote Controller: {item.config.remote_controller}</p>
-		<p>Transportation Platform: {item.config.transportation_platform}</p>
-		<button on:click={() => onEdit(item)}>Edit</button>
-		<button on:click={() => onDelete(item.serial_number)}>Delete</button>
-	</div>
-{/each}
+<table class="table table-striped table-condensed">
+	<thead>
+		<tr>
+			<th>Serial Number</th>
+			<th>Password</th>
+			<th>Date</th>
+			<th>Safety</th>
+			<th>Battery</th>
+			<th>Remote Controller</th>
+			<th>Transportation Platform</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#each items as item}
+			<tr>
+				<td><span class="badge bg-secondary"> {item.serial_number}</span></td>
+				<td>{item.password}</td>
+				<td> {item.config.date}</td>
+				<td> {item.config.safety}</td>
+				<td> {item.config.battery}</td>
+				<td> {item.config.remote_controller}</td>
+				<td> {item.config.transportation_platform}</td>
+				<td><button class="btn btn-info" on:click={() => onEdit(item)}>Edit</button></td>
+				<td
+					><button class="btn btn-danger" on:click={() => onDelete(item.serial_number)}
+						>Delete</button
+					></td
+				>
+			</tr>
+		{/each}
+	</tbody>
+</table>
