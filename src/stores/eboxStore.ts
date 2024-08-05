@@ -1,26 +1,27 @@
 import { writable } from 'svelte/store';
-import { dummyItems } from './dummyData';
-import type { Item } from '../types';
+import { dummyItems } from './eboxDummyData';
+import type { EboxItem } from '../types';
+import { BASE_URL } from '$lib/constants';
 
-export const items = writable<Item[]>([]);
+export const eboxItems = writable<EboxItem[]>([]);
 
 export const fetchItems = async () => {
   try {
-    const response = await fetch('http://10.147.17.144:3000/staging/internal_dashboard/ebox/list');
+    const response = await fetch(`${BASE_URL}/ebox/list`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    items.set(data);
+    eboxItems.set(data);
   } catch (error) {
     console.error('Failed to fetch items, using dummy data:', error);
-    items.set(dummyItems);
+    eboxItems.set(dummyItems);
   }
 };
 
-export const createItem = async (item: Item) => {
+export const createItem = async (item: EboxItem) => {
   try {
-    await fetch('http://10.147.17.144:3000/staging/internal_dashboard/ebox/create', {
+    await fetch(`${BASE_URL}/ebox/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,13 +31,13 @@ export const createItem = async (item: Item) => {
     fetchItems();
   } catch (error) {
     console.error('Failed to create item:', error);
-    items.update(currentItems => [...currentItems, item]);
+    eboxItems.update(currentItems => [...currentItems, item]);
   }
 };
 
-export const updateItem = async (item: Item) => {
+export const updateItem = async (item: EboxItem) => {
   try {
-    await fetch(`http://10.147.17.144:3000/staging/internal_dashboard/ebox/update/${item.serial_number}`, {
+    await fetch(`${BASE_URL}/ebox/update/${item.serial_number}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -46,18 +47,18 @@ export const updateItem = async (item: Item) => {
     fetchItems();
   } catch (error) {
     console.error('Failed to update item:', error);
-    items.update(currentItems => currentItems.map(i => (i.serial_number === item.serial_number ? item : i)));
+    eboxItems.update(currentItems => currentItems.map(i => (i.serial_number === item.serial_number ? item : i)));
   }
 };
 
 export const deleteItem = async (serial_number: string) => {
   try {
-    await fetch(`http://10.147.17.144:3000/staging/internal_dashboard/ebox/delete/${serial_number}`, {
+    await fetch(`${BASE_URL}/ebox/delete/${serial_number}`, {
       method: 'DELETE',
     });
     fetchItems();
   } catch (error) {
     console.error('Failed to delete item:', error);
-    items.update(currentItems => currentItems.filter(i => i.serial_number !== serial_number));
+    eboxItems.update(currentItems => currentItems.filter(i => i.serial_number !== serial_number));
   }
 };

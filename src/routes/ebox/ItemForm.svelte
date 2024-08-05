@@ -1,18 +1,5 @@
 <script lang="ts">
-	/*export let item = {
-		serial_number: '',
-		password: '',
-		config: {
-			date: '',
-			safety: 0,
-			battery: 0,
-			remote_controller: 0,
-			transportation_platform: 0
-		}
-	};*/
-
-	export let item = null;
-
+	export let item: any = null;
 	export let onSubmit;
 
 	const handleSubmit = () => {

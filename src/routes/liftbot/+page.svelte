@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import {
-		eboxItems,
+		liftbotItems,
 		fetchItems,
 		createItem,
 		updateItem,
 		deleteItem
-	} from '../../stores/eboxStore';
+	} from '../../stores/liftbotStore';
 
 	import ItemForm from './ItemForm.svelte';
 	import ItemList from './ItemList.svelte';
 
-	import type { EboxItem } from '../../types';
+	import type { LiftbotItem } from '../../types';
 
-	let currentItem: EboxItem | null = null;
-	let itemList: EboxItem[] = [];
+	let currentItem: LiftbotItem | null = null;
+	let itemList: LiftbotItem[] = [];
 
-	const unsubscribe = eboxItems.subscribe((value) => {
+	const unsubscribe = liftbotItems.subscribe((value) => {
 		itemList = value;
 	});
 
@@ -24,16 +24,16 @@
 		fetchItems();
 	});
 
-	const handleCreate = (item: EboxItem) => {
+	const handleCreate = (item: LiftbotItem) => {
 		createItem(item);
 		currentItem = null;
 	};
 
-	const handleEdit = (item: EboxItem) => {
+	const handleEdit = (item: LiftbotItem) => {
 		currentItem = item;
 	};
 
-	const handleUpdate = (item: EboxItem) => {
+	const handleUpdate = (item: LiftbotItem) => {
 		updateItem(item);
 		currentItem = null;
 	};
@@ -49,7 +49,7 @@
 </script>
 
 <main>
-	<h1>E-Box Managment</h1>
+	<h1>Liftbot Managment</h1>
 
 	{#if currentItem}
 		<ItemForm item={currentItem} onSubmit={handleUpdate} />

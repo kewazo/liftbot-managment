@@ -6,8 +6,15 @@ export interface Config {
     transportation_platform: number;
   }
   
-  export interface Item {
+  export interface EboxItem {
     serial_number: string;
     password: string;
     config: Config;
+  }
+
+
+  export interface LiftbotItem {
+    status: string;
+    version: string;
+    serial_number: string;
   }

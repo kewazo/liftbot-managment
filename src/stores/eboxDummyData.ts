@@ -1,6 +1,6 @@
-import type { Item } from '../types';
+import type { EboxItem } from '../types';
 
-export const dummyItems: Item[] = [
+export const dummyItems: EboxItem[] = [
   {
     serial_number: 'KR1.2s-2211-001',
     password: 'password1',
